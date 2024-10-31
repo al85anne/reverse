@@ -24,12 +24,12 @@ export default function Home() {
       //   email: email,
       //   motDePasse: password,
       // });
-
-      if (role == "admin") {
-        navigate.push("/admin/home");
-      }else{
-        alert('Page non disponible')
-      }
+      navigate.push("/admin/home");
+      // if (role == "admin") {
+      //   navigate.push("/admin/home");
+      // }else{
+      //   alert('Page non disponible')
+      // }
       // var csrfToken = axios.defaults.headers.common['X-CSRF-Token'];
       // var config = {
       //   method: "post",
@@ -88,7 +88,7 @@ export default function Home() {
                       color="blue"
                       id="role"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      required
+                      
                     >
                       <option selected ></option>
                       <option value={"admin"}>Superviseur</option>
@@ -110,7 +110,7 @@ export default function Home() {
                       id="email1"
                       type="email"
                       placeholder="Numéro de téléphone ou l'Email"
-                      required
+                      
                     />
                   </div>
                 </div>
@@ -128,7 +128,7 @@ export default function Home() {
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       id="password1"
                       type="password"
-                      required
+                      
                     />
                   </div>
                 </div>
