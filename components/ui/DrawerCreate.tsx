@@ -1,4 +1,5 @@
 "use client"
+import { IProduct } from "@/Interfaces/IProduct";
 import { IUtilisateur } from "@/Interfaces/UserInterface";
 import {
     Drawer,
@@ -38,7 +39,7 @@ const DrawerCreateUser = (props: { open: boolean, onClose: (value: boolean) => v
     const [accesArt, setAccesArt] = useState<boolean>(false);
     const [accesPor, setAccesPor] = useState<boolean>(false);
     // const [accesRes, setAccesRes] = useState<boolean>(false);
-    const nomError = (nom.trim() === "" && nom.length > 0) ;
+    const nomError = (nom.trim() === "" && nom.length > 0);
     const prenomError = (prenom.trim() === "" && nom.length > 0);
     const logginError = (loggin.trim() === "" && nom.length > 0);
     const emailError = (email.trim() === "" && nom.length > 0);
@@ -53,11 +54,11 @@ const DrawerCreateUser = (props: { open: boolean, onClose: (value: boolean) => v
         }
     })
 
-    const onSubmit = () => {
-        if (nom != "") {
+    // const onSubmit = () => {
+    //     if (nom != "") {
 
-        }
-    }
+    //     }
+    // }
     return (
         <Drawer
             isOpen={isOpen}
@@ -70,23 +71,23 @@ const DrawerCreateUser = (props: { open: boolean, onClose: (value: boolean) => v
                 <DrawerHeader>Créer un compte utilisateur</DrawerHeader>
                 <DrawerBody>
                     <Stack spacing={4}>
-                        <FormControl  isInvalid={nomError} isRequired>
+                        <FormControl isInvalid={nomError} isRequired>
                             <FormLabel>Nom</FormLabel>
                             <Input value={nom} onChange={(e) => setNom(e.target.value)} type='text' />
                             {!nomError ? (
                                 <FormHelperText>
-                                   Entrer le nom de l&apos;utilisateur
+                                    Entrer le nom de l&apos;utilisateur
                                 </FormHelperText>
                             ) : (
                                 <FormErrorMessage>Le Nom est requis.</FormErrorMessage>
                             )}
                         </FormControl>
-                        <FormControl isInvalid={prenomError}  isRequired>
+                        <FormControl isInvalid={prenomError} isRequired>
                             <FormLabel>Prénom</FormLabel>
                             <Input type='text' value={prenom} onChange={(e) => setPrenom(e.target.value)} />
                             {!prenomError ? (
                                 <FormHelperText>
-                                   Entrer le prénom de l&apos;utilisateur
+                                    Entrer le prénom de l&apos;utilisateur
                                 </FormHelperText>
                             ) : (
                                 <FormErrorMessage>Le prénom est requis.</FormErrorMessage>
@@ -334,4 +335,161 @@ const DrawerUpdateUser = (props: { open: boolean, item: IUtilisateur, onClose: (
     )
 }
 
-export { DrawerCreateUser, DrawerUpdateUser }
+
+const DrawerUpdateProduct = (props: { open: boolean, item: IProduct, onClose: (value: boolean) => void; onSubmit: (value: IProduct) => void }) => {
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const [nom, setNom] = useState<string>("");
+    const [prixAchat, setPrixAchat] = useState<string>("");
+    const [prixPromotion, setPrixPromotion] = useState<string>("");
+    const [prixVente, setPrixVente] = useState<string>("");
+    const [imageUrl, setImageUrl] = useState<string>("");
+    const [fournisseur, setFournisseur] = useState<string>("");
+    const [qteAlert, setQteAlert] = useState<string>("");
+    const [qtePerdue, setQtePerdue] = useState<string>("");
+    const [promotion, setPromotion] = useState<boolean>(false);
+    const [qteRst, setRst] = useState<string>("");
+    const [unite, setUnite] = useState<number>(0);
+    const [user, setUser] = useState<string>("");
+    const [categorieId, setCategorieId] = useState<string>("");
+    const [cadeBarre, setCodeBarre] = useState<string>("");
+    const [commerceId, setCommerceId] = useState<string>("");
+    const [peremption, setPeremption] = useState<string>("");
+    const [pertes, setPertes] = useState<string>("");
+    const [reference, setReference] = useState<string>("");
+
+
+    useEffect(() => {
+        if (props.open) {
+            onOpen();
+        }
+    })
+
+    return (
+        <Drawer
+            isOpen={isOpen}
+            placement='right'
+            onClose={() => { onClose(); props.onClose(false) }}
+        >
+            <DrawerOverlay />
+            <DrawerContent>
+                <DrawerCloseButton />
+                <DrawerHeader>Editer un compte utilisateur</DrawerHeader>
+                <DrawerBody>
+                    <Stack spacing={4}>
+                        <FormControl>
+                            <FormLabel>Nom</FormLabel>
+                            <Input value={nom} onChange={(e) => setNom(e.target.value)} type='text' />
+                            <FormHelperText>Champ obligatoire</FormHelperText>
+                        </FormControl>
+                        <FormControl>
+                            <FormLabel>Prix d&apos;achat</FormLabel>
+                            <Input type='number' value={prixAchat} onChange={(e) => setPrixAchat(e.target.value)} />
+                            <FormHelperText>Champ obligatoire</FormHelperText>
+                        </FormControl>
+                        <FormControl display='flex' alignItems='center' justifyContent={"space-between"}>
+                            <FormLabel htmlFor='access-remboursement' mb='0'>
+                                Accès remboursement
+                            </FormLabel>
+                            <Switch id='access-remboursement' isChecked={promotion} onChange={(e) => setPromotion(e.target.checked)} />
+                        </FormControl>
+                        {
+                            promotion ? (
+                                <FormControl>
+                                    <FormLabel>Prix de promotion</FormLabel>
+                                    <Input type='number' value={prixPromotion} onChange={(e) => setPrixPromotion(e.target.value)} />
+                                    <FormHelperText>Champ obligatoire</FormHelperText>
+                                </FormControl>
+                            ) : null
+                        }
+                        <FormControl>
+                            <FormLabel>Prx de vente</FormLabel>
+                            <Input type='number' value={prixVente} onChange={(e) => setPrixVente(e.target.value)} />
+                            <FormHelperText>Champ obligatoire</FormHelperText>
+                        </FormControl>
+                        <FormControl>
+                            <FormLabel>URL de l&apos;image</FormLabel>
+                            <Input type='url' value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} />
+                            <FormHelperText>Champ obligatoire</FormHelperText>
+                        </FormControl>
+
+                        <FormControl>
+                            <FormLabel>Fournisseur</FormLabel>
+                            <Input type='text' value={fournisseur} onChange={(e) => setFournisseur(e.target.value)} />
+                            <FormHelperText>Champ obligatoire</FormHelperText>
+                        </FormControl>
+                        {/* <FormControl>
+                            <FormLabel>Pays</FormLabel>
+                            <Select value={pays} onChange={(e) => setPays(e.target.value)} placeholder='Select country'>
+                                <option>United Arab Emirates</option>
+                                <option value={"nigeria"}>Nigeria</option>
+                            </Select>
+                            <FormHelperText>Champ obligatoire</FormHelperText>
+                        </FormControl>
+                        <FormControl>
+                            <FormLabel>Role</FormLabel>
+                            <Select value={role} onChange={(e) => setRole(e.target.value)} placeholder='Select country'>
+                                <option>United Arab Emirates</option>
+                                <option value={"nigeria"}>Nigeria</option>
+                            </Select>
+                            <FormHelperText>Champ obligatoire</FormHelperText>
+                        </FormControl>
+                        <FormControl>
+                            <FormLabel>Nom de votre entreprise</FormLabel>
+                            <Input value={entreprise} onChange={(e) => setEntreprise(e.target.value)} type='text' />
+                            <FormHelperText>Champ obligatoire</FormHelperText>
+                        </FormControl>
+                        <FormControl>
+                            <FormLabel>Mot de passe</FormLabel>
+                            <Input value={password} onChange={(e) => setPassword(e.target.value)} type='password' />
+                            <FormHelperText>Champ obligatoire</FormHelperText>
+                        </FormControl>
+                        <FormControl mt={3} display='flex' alignItems='center' justifyContent={"space-between"}>
+                            <FormLabel htmlFor='access-statistic' mb='0'>
+                                Accès statistic
+                            </FormLabel>
+                            <Switch id='access-statistic' isChecked={accesStat} onChange={(e) => setAccesStat(e.target.checked)} />
+                        </FormControl>
+                        <FormControl display='flex' justifyContent={"space-between"} alignItems='center'>
+                            <FormLabel htmlFor='access-fournisseur' mb='0'>
+                                Accès fournisseur
+                            </FormLabel>
+                            <Switch id='access-fournisseur' isChecked={accesFou} onChange={(e) => setAccesFou(e.target.checked)} />
+                        </FormControl>
+                        <FormControl display='flex' alignItems='center' justifyContent={"space-between"}>
+                            <FormLabel htmlFor='access-inventaire' mb='0'>
+                                Accès inventaire
+                            </FormLabel>
+                            <Switch id='access-inventaire' isChecked={accesInv} onChange={(e) => setAccesInv(e.target.checked)} />
+                        </FormControl>
+                        <FormControl display='flex' alignItems='center' justifyContent={"space-between"}>
+                            <FormLabel htmlFor='access-remboursement' mb='0'>
+                                Accès remboursement
+                            </FormLabel>
+                            <Switch id='access-remboursement' isChecked={accesRem} onChange={(e) => setAccesRem(e.target.checked)} />
+                        </FormControl>
+                        <FormControl display='flex' alignItems='center' justifyContent={"space-between"}>
+                            <FormLabel htmlFor='access-art-depense' mb='0'>
+                                Déclarer Article & Dépense
+                            </FormLabel>
+                            <Switch id='access-art-depense' isChecked={accesArt} onChange={(e) => setAccesArt(e.target.checked)} />
+                        </FormControl>
+                        <FormControl display='flex' alignItems='center' justifyContent={"space-between"}>
+                            <FormLabel htmlFor='access-portefeuille-mobile' mb='0'>
+                                Accès portefeuille mobile
+                            </FormLabel>
+                            <Switch id='access-portefeuille-mobile' isChecked={accesPor} onChange={(e) => setAccesPor(e.target.checked)} />
+                        </FormControl> */}
+                    </Stack>
+                </DrawerBody>
+                <DrawerFooter>
+                    <Button variant='outline' mr={3} onClick={() => { onClose(); props.onClose(false) }}>
+                        Fermer
+                    </Button>
+                    <Button colorScheme='blue'>Envoyer</Button>
+                </DrawerFooter>
+            </DrawerContent>
+        </Drawer>
+    )
+}
+
+export { DrawerCreateUser, DrawerUpdateUser, DrawerUpdateProduct }

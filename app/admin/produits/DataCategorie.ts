@@ -1,16 +1,25 @@
-const CategorieList = [
+import { ICategorie } from "@/Interfaces/ICategorie"
+import { UserList } from "../utilisateurs/DataUtilisateur"
+
+const CategorieList: ICategorie[] = [
     {
-        nom: "Appariel électronique",
-        description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem doloremque cum dolor eveniet harum commodi nisi, eaque impedit sequi, provident non aperiam pariatur similique magni quibusdam veniam repellendus. Debitis, suscipit?"
+        label: "Appariel électronique",
+        description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem doloremque cum dolor eveniet harum commodi nisi, eaque impedit sequi, provident non aperiam pariatur similique magni quibusdam veniam repellendus. Debitis, suscipit?",
+        userId: "1",
+        user: UserList[0]
     },
     {
-        nom: "Appariel Managé",
-        description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem doloremque cum dolor eveniet harum commodi nisi, eaque impedit sequi, provident non aperiam pariatur similique magni quibusdam veniam repellendus. Debitis, suscipit?"
+        label: "Appariel Managé",
+        description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem doloremque cum dolor eveniet harum commodi nisi, eaque impedit sequi, provident non aperiam pariatur similique magni quibusdam veniam repellendus. Debitis, suscipit?",
+        userId: "1",
+        user: UserList[0]
     },
     {
-        nom: "Salon",
-        description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem doloremque cum dolor eveniet harum commodi nisi, eaque impedit sequi, provident non aperiam pariatur similique magni quibusdam veniam repellendus. Debitis, suscipit?"
+        label: "Salon",
+        description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem doloremque cum dolor eveniet harum commodi nisi, eaque impedit sequi, provident non aperiam pariatur similique magni quibusdam veniam repellendus. Debitis, suscipit?",
+        userId: "2",
+        user: UserList[2]
     }
 ]
 
-export { CategorieList }
+export default CategorieList

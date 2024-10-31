@@ -1,3 +1,4 @@
+import { ICategorie } from '@/Interfaces/ICategorie';
 import {
     Modal,
     ModalOverlay,
@@ -17,7 +18,7 @@ import {
 } from '@chakra-ui/react'
 import { FormEvent, useEffect, useState } from 'react'
 
-const ModalCreateCategorie = (props: { open: boolean, onClose: (value: boolean) => void; onSubmit: (value: { nom: string, description: string }) => void }) => {
+const ModalCreateCategorie = (props: { open: boolean, onClose: (value: boolean) => void; onSubmit: (value: ICategorie) => void }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [nom, setNom] = useState<string>("")
     const [description, setDescription] = useState<string>("");
@@ -32,11 +33,18 @@ const ModalCreateCategorie = (props: { open: boolean, onClose: (value: boolean) 
 
     const onSubmit = (e: FormEvent) => {
         e.preventDefault()
+       
         if (nom.trim() != "" && description.trim() != "") {
-            props.onSubmit({ nom: nom, description: description })
-            props.onClose(false)
+            
+            props.onSubmit({
+                label: nom,
+                description: description,
+                userId: "1",
+                user: null
+            })
+            
         } else {
-
+            alert(1)
         }
 
     }
@@ -74,7 +82,7 @@ const ModalCreateCategorie = (props: { open: boolean, onClose: (value: boolean) 
 
                     </ModalBody>
                     <ModalFooter>
-                        <Button colorScheme='blue' mr={3} >
+                        <Button type='submit' colorScheme='blue' mr={3} >
                             Enregistrer
                         </Button>
                         <Button type='button' onClick={() => { onClose(); props.onClose(false)}} variant='ghost'>Annuler</Button>

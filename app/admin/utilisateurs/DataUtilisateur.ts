@@ -1,4 +1,6 @@
-const UserList = [
+import { IUtilisateur } from "@/Interfaces/UserInterface"
+
+const UserList : IUtilisateur [] = [
     {
         id: "1",
         nom: "John",
