@@ -58,7 +58,7 @@ export default function Page() {
                     <HStack>
                         <Button size={"sm"} onClick={() => { setOpen(true) }} className="rounded-full" px={8} colorScheme="blue">Créer une catégorie</Button>
 
-                        <HStack bg={"gray.200"} padding={2} className=" shadow-inner rounded-xl" w={"full"} spacing={2}>
+                        <HStack bg={"gray.200"} padding={2} className="shadow-inner rounded-xl" w={"full"} spacing={2}>
                             {firstDataList.map((item, index) => (
                                 <Tag
 
@@ -74,7 +74,7 @@ export default function Page() {
                             ))}
                         </HStack>
                     </HStack>
-                    <Box mt={8} className="grid gap-4 grid-cols-4">
+                    <Box mt={8} className="grid grid-cols-4 gap-4">
                         {
                             dataList.map((item, index) => (
                                 <Card key={index} >
@@ -100,13 +100,17 @@ export default function Page() {
                                     </CardBody>
                                     <Divider />
                                     <CardFooter>
-                                        <Box className="col-span-full w-full">
+                                        <Box className="w-full col-span-full">
                                             <ButtonGroup spacing='2'>
                                                 <Link href={"/admin/produits/" + item.id}>
-                                                    <Button variant='solid' colorScheme='blue'>
+                                                    <Button size={"sm"} variant='solid' colorScheme='blue'>
                                                         Details sur le produit
                                                     </Button>
+
                                                 </Link>
+                                                <Button size={"sm"} variant='solid' colorScheme='red'>
+                                                    Retirer de l&apos;application
+                                                </Button>
                                             </ButtonGroup>
                                             <Text fontSize={"smaller"} textAlign={"right"}>
                                                 {item.user.created_at}
