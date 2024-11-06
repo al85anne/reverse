@@ -1,7 +1,7 @@
 import ProduitImage from "@/public/images/WFHV9014S-web2.webp";
-import { UserList } from "../utilisateurs/DataUtilisateur";
 import { IProduct } from "@/Interfaces/IProduct";
 import CategorieList from "./DataCategorie";
+import { UserList } from "@/app/admin/utilisateurs/DataUtilisateur";
 export const DataProductList: IProduct[] = [
     {
         id: "1",

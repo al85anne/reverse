@@ -1,14 +1,16 @@
 "use client";
 
-import { Box, Image, Text, List, ListItem, ButtonGroup, IconButton, Table, TableCaption, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr, Button, Editable, Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react"
+import { Box, Image, Text, List, ListItem, ButtonGroup, Table, TableCaption, TableContainer, Tbody, Td, Th, Thead, Tr, Button, Editable, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Avatar } from "@chakra-ui/react"
 
 import React, { useEffect, useState } from "react";
 import { DataProductList } from "../DataProduct";
-import { UnlockIcon, LockIcon, ViewIcon, EditIcon, DeleteIcon } from "@chakra-ui/icons";
+// import { UnlockIcon, LockIcon, ViewIcon, EditIcon, DeleteIcon } from "@chakra-ui/icons";
 import { IProduct } from "@/Interfaces/IProduct";
 import Link from "next/link";
 import ProductIcon from "@/public/icones/icons8-product-48.png";
 import CardStatSimple from "@/components/ui/CardStatSimple";
+
+// import CardProduct from "@/components/ui/CardProduct";
 interface IPrams {
     id?: string
 }
@@ -36,12 +38,14 @@ export default function Page({ params }: { params: IPrams }) {
                                 <BreadcrumbLink href={'/admin/produits/' + data.id}>{data.nom}</BreadcrumbLink>
                             </BreadcrumbItem>
                         </Breadcrumb>
-                        <Text fontSize={"x-large"}  fontWeight={"bold"} my={4}>Produit ({data.reference})</Text>
+                        <Text fontSize={"x-large"} fontWeight={"bold"} my={4}>Produit ({data.reference})</Text>
                         <Box className="flex justify-start gap-8" >
-                            <Box bg={"white"} className="rounded-xl"  padding={4} w={"fit-content"}>
+                            <Box bg={"white"} className="max-w-2xl rounded-xl" padding={4} w={"fit-content"}>
                                 <Image src={data.image_url} w={500}></Image>
+                                <p className="px-4 my-2 text-sm text-gray-600" >{data.description}</p>
+
                                 <TableContainer  >
-                                    <Table  size={"sm"} variant='simple'>
+                                    <Table size={"sm"} variant='simple'>
                                         <TableCaption>Détail du produit</TableCaption>
                                         <Thead>
                                             <Tr>
@@ -58,10 +62,7 @@ export default function Page({ params }: { params: IPrams }) {
                                                 <Td fontWeight={"bold"}>Reférence du produit</Td>
                                                 <Td isNumeric>{data.reference}</Td>
                                             </Tr>
-                                            <Tr>
-                                                <Td fontWeight={"bold"}>Description du produit</Td>
-                                                <Td isTruncated>{data.description}</Td>
-                                            </Tr>
+
                                             <Tr>
                                                 <Td fontWeight={"bold"}>Prix d&apos;achat</Td>
                                                 <Td color={"blue"} fontWeight={"medium"} isNumeric>{data.prix_achat}</Td>
@@ -135,9 +136,41 @@ export default function Page({ params }: { params: IPrams }) {
                                         </Tbody>
                                     </Table>
                                 </TableContainer>
+                                <ButtonGroup px={4} size={"sm"}>
+                                    <Button colorScheme="red">Supprimer</Button>
+                                    <Button colorScheme="orange" bg="black" color="white" >Bloquer</Button>
+                                </ButtonGroup>
                             </Box>
                             <Box>
                                 <CardStatSimple image={ProductIcon.src} title={"Nombre de commande concernant ce produit"} stat={data.ligneCmd.length} ></CardStatSimple>
+                                <Box p={4} bg={"white"} className="rounded-xl" mt={4}>
+                                    <Avatar size={"sm"}></Avatar>
+                                    <Text>{data.user.nom} {data.user.prenom}</Text>
+                                    <Text>Loggin: 87556985588</Text>
+                                    <Link href={"#"} className="text-sm font-bold text-blue-400 hover:underline">Voir tous ces produits</Link>
+                                </Box>
+                                <Box p={4} bg={"white"} className="rounded-xl" mt={4}>
+                                    {
+                                        DataProductList.map((item, index) => (
+                                            <Box  display="flex" gap={2}>
+                                                <Box key={index} className="max-w-sm">
+                                                    <Image src={item.image_url} w={200}></Image>
+                                                </Box>
+                                                <Box>
+                                                    <List>
+                                                    <ListItem display="flex" gap={2}><Text fontWeight={"medium"} color={"gray.400"}>Montant :</Text> <Text fontWeight={"medium"}>{item.prix_vente}</Text></ListItem>
+                                                    <ListItem display="flex" gap={2}><Text fontWeight={"medium"} color={"gray.400"}>Produit :</Text> <Text fontWeight={"medium"}>{item.nom}</Text></ListItem>
+                                                    <ListItem display="flex" gap={2}><Text fontWeight={"medium"} color={"gray.400"}>Categorie :</Text> <Text fontWeight={"medium"}>{item.categorie.label}</Text></ListItem>
+                                                    <ListItem display="flex" gap={2}><Text fontWeight={"medium"} color={"gray.400"}>Date :</Text> <Text fontWeight={"medium"}>2024-02-22</Text></ListItem>
+                                                    <ListItem display="flex" gap={2}><Text fontWeight={"medium"} color={"gray.400"}>Status :</Text> <Text fontWeight={"medium"} color="green">En vente</Text></ListItem>
+                                                    </List>
+                                                </Box>
+                                            </Box>
+                                        ))
+                                    }
+
+                                </Box>
+
                             </Box>
                         </Box>
                     </>

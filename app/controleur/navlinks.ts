@@ -10,44 +10,31 @@ import SettingIcon from "@/public/icones/icons8-setting-48.png";
 const navLink = [
     {
         label: "Tableau de bord",
-        link: "/admin/home",
+        link: "/controleur/home",
         icon: DashboardIcon.src
     },
-    {
-        label: "Utilisateurs",
-        link: "/admin/utilisateurs",
-        icon: ArchiveIcon.src
-    },
+
     {
         label: "Finances",
-        link: "/admin/finances",
+        link: "/controleur/finances",
         icon: FinanceIcon.src
     },
     {
         label: "Produits",
-        link: "/admin/produits",
+        link: "/controleur/produits",
         icon: ProduitIcon.src
     },
     {
         label: "Cagnottes",
-        link: "/admin/cagnottes",
+        link: "/controleur/cagnottes",
         icon: CagnotteIcon.src
     },
     {
         label: "Factures",
-        link: "/admin/factures",
+        link: "/controleur/factures",
         icon: InvoiceIcon.src
     },
-    {
-        label: "Administrations",
-        link: "/admin/administrations",
-        icon: SettingIcon.src
-    }
-    // {
-    //     label: "Paramètres",
-    //     link: "/admin/parametres",
-    //     icon: SettingIcon.src
-    // }
+    
 ]
 
 export { navLink };

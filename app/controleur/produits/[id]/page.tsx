@@ -1,23 +1,24 @@
 "use client";
 
-import { Box, Text,  ButtonGroup, Table, TableCaption, TableContainer, Th, Thead, Tr, Button} from "@chakra-ui/react"
+import { Box, Image, Text, List, ListItem, ButtonGroup, IconButton, Table, TableCaption, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr, Button, Editable, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Avatar } from "@chakra-ui/react"
 
 import React, { useEffect, useState } from "react";
-import { DataCagnotte } from "../DataCagnotte";
-// import { UnlockIcon, LockIcon, ViewIcon, EditIcon, DeleteIcon } from "@chakra-ui/icons";
-// import { IProduct } from "@/Interfaces/IProduct";
-// import Link from "next/link";
-// import ProductIcon from "@/public/icones/icons8-product-48.png";
-// import CardStatSimple from "@/components/ui/CardStatSimple";
-import { ICagnotte } from "@/Interfaces/ICagnotte";
+import { DataProductList } from "../DataProduct";
+import { UnlockIcon, LockIcon, ViewIcon, EditIcon, DeleteIcon } from "@chakra-ui/icons";
+import { IProduct } from "@/Interfaces/IProduct";
+import Link from "next/link";
+import ProductIcon from "@/public/icones/icons8-product-48.png";
+import CardStatSimple from "@/components/ui/CardStatSimple";
+
+import CardProduct from "@/components/ui/CardProduct";
 interface IPrams {
     id?: string
 }
 
 export default function Page({ params }: { params: IPrams }) {
-    const [data, setData] = useState<ICagnotte | undefined>()
+    const [data, setData] = useState<IProduct | undefined>()
     useEffect(() => {
-        setData(DataCagnotte.filter(e => e.id == params.id)[0])
+        setData(DataProductList.filter(e => e.id == params.id)[0])
     })
     return (
         <>
@@ -25,36 +26,34 @@ export default function Page({ params }: { params: IPrams }) {
             {
                 data ? (
                     <>
-                        <Text fontSize={"large"} color={"gray.800"} mb={4} fontWeight={"bold"} >{data.titre}</Text>
-                        <Box bg={"white"} className="rounded-xl" padding={4} w={"fit-content"}>
-                            {/* <Image src={data.image_url} w={500}></Image> */}
-                            <div className="size-96">
-                                No image
-                            </div>
-                        </Box>
-                        <Box my={4}>
-                            <Text fontSize={"x-large"}>Total des cotisations <span className="font-bold text-green-500">{data.financier}</span></Text>
-                            <ButtonGroup mt={2}>
-                                <Button size={"sm"} colorScheme={"green"} >Participer</Button>
-                                <Button size={"sm"} colorScheme="yellow" >Suspendre</Button>
-                                {
-                                    data.isLock ? (
-                                        <Button size={"sm"} colorScheme="red">Supprimer</Button>
-                                    ) : null
-                                }
-                            </ButtonGroup>
+                        <title>Reserve - Produits</title>
+                        <Breadcrumb separator='-' fontSize={"small"}>
+                            <BreadcrumbItem>
+                                <BreadcrumbLink href='/admin/home'>Tableau de bord</BreadcrumbLink>
+                            </BreadcrumbItem>
+                            <BreadcrumbItem>
+                                <BreadcrumbLink href='/admin/produits'>produits</BreadcrumbLink>
+                            </BreadcrumbItem>
+                            <BreadcrumbItem>
+                                <BreadcrumbLink href={'/admin/produits/' + data.id}>{data.nom}</BreadcrumbLink>
+                            </BreadcrumbItem>
+                        </Breadcrumb>
+                        <Text fontSize={"x-large"} fontWeight={"bold"} my={4}>Produit ({data.reference})</Text>
+                        <Box className="flex justify-start gap-8" >
+                            <Box bg={"white"} className="max-w-2xl rounded-xl" padding={4} w={"fit-content"}>
+                                <Image src={data.image_url} w={500}></Image>
+                                <p className="px-4 my-2 text-sm text-gray-600" >{data.description}</p>
 
-                        </Box>
-                        <TableContainer  >
-                            <Table size={"sm"} variant='simple'>
-                                <TableCaption>Détail du produit</TableCaption>
-                                <Thead>
-                                    <Tr>
-                                        <Th>Libellé</Th>
-                                        <Th></Th>
-                                    </Tr>
-                                </Thead>
-                                {/* <Tbody>
+                                <TableContainer  >
+                                    <Table size={"sm"} variant='simple'>
+                                        <TableCaption>Détail du produit</TableCaption>
+                                        <Thead>
+                                            <Tr>
+                                                <Th>Libellé</Th>
+                                                <Th></Th>
+                                            </Tr>
+                                        </Thead>
+                                        <Tbody>
                                             <Tr>
                                                 <Td fontWeight={"bold"}>Nom du produit</Td>
                                                 <Td isNumeric>{data.nom}</Td>
@@ -63,10 +62,7 @@ export default function Page({ params }: { params: IPrams }) {
                                                 <Td fontWeight={"bold"}>Reférence du produit</Td>
                                                 <Td isNumeric>{data.reference}</Td>
                                             </Tr>
-                                            <Tr>
-                                                <Td fontWeight={"bold"}>Description du produit</Td>
-                                                <Td isTruncated>{data.description}</Td>
-                                            </Tr>
+
                                             <Tr>
                                                 <Td fontWeight={"bold"}>Prix d&apos;achat</Td>
                                                 <Td color={"blue"} fontWeight={"medium"} isNumeric>{data.prix_achat}</Td>
@@ -137,9 +133,46 @@ export default function Page({ params }: { params: IPrams }) {
                                                 <Td fontWeight={"bold"}>Crée le</Td>
                                                 <Td isNumeric >{data.created_at}</Td>
                                             </Tr>
-                                        </Tbody> */}
-                            </Table>
-                        </TableContainer>
+                                        </Tbody>
+                                    </Table>
+                                </TableContainer>
+                                <ButtonGroup px={4} size={"sm"}>
+                                    <Button colorScheme="red">Supprimer</Button>
+                                    <Button colorScheme="orange" bg="black" color="white" >Bloquer</Button>
+                                </ButtonGroup>
+                            </Box>
+                            <Box>
+                                <CardStatSimple image={ProductIcon.src} title={"Nombre de commande concernant ce produit"} stat={data.ligneCmd.length} ></CardStatSimple>
+                                <Box p={4} bg={"white"} className="rounded-xl" mt={4}>
+                                    <Avatar size={"sm"}></Avatar>
+                                    <Text>{data.user.nom} {data.user.prenom}</Text>
+                                    <Text>Loggin: 87556985588</Text>
+                                    <Link href={"#"} className="text-sm font-bold text-blue-400 hover:underline">Voir tous ces produits</Link>
+                                </Box>
+                                <Box p={4} bg={"white"} className="rounded-xl" mt={4}>
+                                    {
+                                        DataProductList.map((item, index) => (
+                                            <Box  display="flex" gap={2}>
+                                                <Box key={index} className="max-w-sm">
+                                                    <Image src={item.image_url} w={200}></Image>
+                                                </Box>
+                                                <Box>
+                                                    <List>
+                                                    <ListItem display="flex" gap={2}><Text fontWeight={"medium"} color={"gray.400"}>Montant :</Text> <Text fontWeight={"medium"}>{item.prix_vente}</Text></ListItem>
+                                                    <ListItem display="flex" gap={2}><Text fontWeight={"medium"} color={"gray.400"}>Produit :</Text> <Text fontWeight={"medium"}>{item.nom}</Text></ListItem>
+                                                    <ListItem display="flex" gap={2}><Text fontWeight={"medium"} color={"gray.400"}>Categorie :</Text> <Text fontWeight={"medium"}>{item.categorie.label}</Text></ListItem>
+                                                    <ListItem display="flex" gap={2}><Text fontWeight={"medium"} color={"gray.400"}>Date :</Text> <Text fontWeight={"medium"}>2024-02-22</Text></ListItem>
+                                                    <ListItem display="flex" gap={2}><Text fontWeight={"medium"} color={"gray.400"}>Status :</Text> <Text fontWeight={"medium"} color="green">En vente</Text></ListItem>
+                                                    </List>
+                                                </Box>
+                                            </Box>
+                                        ))
+                                    }
+
+                                </Box>
+
+                            </Box>
+                        </Box>
                     </>
                 ) : null
             }

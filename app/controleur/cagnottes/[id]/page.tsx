@@ -1,14 +1,9 @@
 "use client";
 
-import { Box, Text,  ButtonGroup, Table, TableCaption, TableContainer, Th, Thead, Tr, Button} from "@chakra-ui/react"
+import { Box, Text, ButtonGroup, Table, TableCaption, TableContainer, Th, Thead, Tr, Button } from "@chakra-ui/react"
 
 import React, { useEffect, useState } from "react";
 import { DataCagnotte } from "../DataCagnotte";
-// import { UnlockIcon, LockIcon, ViewIcon, EditIcon, DeleteIcon } from "@chakra-ui/icons";
-// import { IProduct } from "@/Interfaces/IProduct";
-// import Link from "next/link";
-// import ProductIcon from "@/public/icones/icons8-product-48.png";
-// import CardStatSimple from "@/components/ui/CardStatSimple";
 import { ICagnotte } from "@/Interfaces/ICagnotte";
 interface IPrams {
     id?: string

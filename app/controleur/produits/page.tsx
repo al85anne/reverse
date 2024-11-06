@@ -16,7 +16,7 @@ export default function Page() {
     const [openSousCategorie, setOpenSousCategorie] = useState<boolean>(false)
     const [openCreateProduct, setOpenCreateProduct] = useState<boolean>(false)
     const [firstDataList, setFirstDataList] = useState<ICategorie[]>(CategorieList)
-    // const [dataList, setDataList] = useState<IProduct[]>(DataProductList)
+    // const [dataList] = useState<IProduct[]>(DataProductList)
     // const [statusAlert, setStatusAlert] = useState<"info" | "warning" | "success" | "error" | "loading" | undefined>()
     // const onShowAlert = (message: string, status: "info" | "warning" | "success" | "error" | "loading" | undefined) => {
     //     setMessageAlert(message);

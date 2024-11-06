@@ -12,6 +12,7 @@ import {
     Button,
     useDisclosure,
     Select,
+    Box,
     Switch,
     FormControl,
     FormLabel,
@@ -21,6 +22,7 @@ import {
     Input,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+
 const DrawerCreateUser = (props: { open: boolean, onClose: (value: boolean) => void; onSubmit: (value: IUtilisateur) => void }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [nom, setNom] = useState<string>("");
@@ -335,8 +337,7 @@ const DrawerUpdateUser = (props: { open: boolean, item: IUtilisateur, onClose: (
     )
 }
 
-
-const DrawerUpdateProduct = (props: { open: boolean, item: IProduct, onClose: (value: boolean) => void; onSubmit: (value: IProduct) => void }) => {
+const DrawerCreateProduct = (props: { open: boolean, onClose: (value: boolean) => void; onSubmit: (value: IProduct) => void }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [nom, setNom] = useState<string>("");
     const [prixAchat, setPrixAchat] = useState<string>("");
@@ -347,8 +348,8 @@ const DrawerUpdateProduct = (props: { open: boolean, item: IProduct, onClose: (v
     const [qteAlert, setQteAlert] = useState<string>("");
     const [qtePerdue, setQtePerdue] = useState<string>("");
     const [promotion, setPromotion] = useState<boolean>(false);
-    const [qteRst, setRst] = useState<string>("");
-    const [unite, setUnite] = useState<number>(0);
+    const [qteRst, setQteRst] = useState<string>("");
+    const [unite, setUnite] = useState<string>("");
     const [user, setUser] = useState<string>("");
     const [categorieId, setCategorieId] = useState<string>("");
     const [cadeBarre, setCodeBarre] = useState<string>("");
@@ -373,12 +374,17 @@ const DrawerUpdateProduct = (props: { open: boolean, item: IProduct, onClose: (v
             <DrawerOverlay />
             <DrawerContent>
                 <DrawerCloseButton />
-                <DrawerHeader>Editer un compte utilisateur</DrawerHeader>
+                <DrawerHeader>Editer un créer un produit</DrawerHeader>
                 <DrawerBody>
                     <Stack spacing={4}>
                         <FormControl>
                             <FormLabel>Nom</FormLabel>
                             <Input value={nom} onChange={(e) => setNom(e.target.value)} type='text' />
+                            <FormHelperText>Champ obligatoire</FormHelperText>
+                        </FormControl>
+                        <FormControl>
+                            <FormLabel>Reference</FormLabel>
+                            <Input value={reference} onChange={(e) => setReference(e.target.value)} type='text' />
                             <FormHelperText>Champ obligatoire</FormHelperText>
                         </FormControl>
                         <FormControl>
@@ -416,6 +422,55 @@ const DrawerUpdateProduct = (props: { open: boolean, item: IProduct, onClose: (v
                             <FormLabel>Fournisseur</FormLabel>
                             <Input type='text' value={fournisseur} onChange={(e) => setFournisseur(e.target.value)} />
                             <FormHelperText>Champ obligatoire</FormHelperText>
+                        </FormControl>
+                        <Box>
+                            <legend className="text-xs text-stone-400">Quantités</legend>
+                            <hr />
+                        </Box>
+                        <FormControl>
+                            <FormLabel>Quantité alert</FormLabel>
+                            <Input type='number'min={0} value={qteAlert} onChange={(e) => setQteAlert(e.target.value)} />
+                            <FormHelperText>Champ obligatoire</FormHelperText>
+                        </FormControl>
+                        <FormControl>
+                            <FormLabel>Quantité perdue</FormLabel>
+                            <Input type='number'min={0} value={qtePerdue} onChange={(e) => setQtePerdue(e.target.value)} />
+                            <FormHelperText>Champ obligatoire</FormHelperText>
+                        </FormControl>
+                        <FormControl>
+                            <FormLabel>Quantité restante</FormLabel>
+                            <Input type='number'min={0} value={qteRst} onChange={(e) => setQteRst(e.target.value)} />
+                            <FormHelperText>Champ obligatoire</FormHelperText>
+                        </FormControl>
+                        <Box>
+                            <legend className="text-xs text-stone-400">Autres</legend>
+                            <hr />
+                        </Box>
+                        <FormControl>
+                            <FormLabel>Unite</FormLabel>
+                            <Input type='text' min={0} value={unite} onChange={(e) => setUnite(e.target.value)} />
+                            <FormHelperText>Exp: kg, littre, etc</FormHelperText>
+                        </FormControl>
+                      
+                        <FormControl>
+                            <FormLabel>Code barre</FormLabel>
+                            <Input type='text' min={0} value={cadeBarre} onChange={(e) => setCodeBarre(e.target.value)} />
+                            <FormHelperText>Champ obligatoire</FormHelperText>
+                        </FormControl>
+                        <FormControl>
+                            <FormLabel>Peremption</FormLabel>
+                            <Input type='text' min={0} value={peremption} onChange={(e) => setPeremption(e.target.value)} />
+                            <FormHelperText>Champ obligatoire</FormHelperText>
+                        </FormControl>
+                        <FormControl>
+                            <FormLabel>Peremption</FormLabel>
+                            <Input type='date' min={0} value={peremption} onChange={(e) => setPeremption(e.target.value)} />
+                            <FormHelperText></FormHelperText>
+                        </FormControl>
+                        <FormControl>
+                            <FormLabel>pertes</FormLabel>
+                            <Input type='string' min={0} value={pertes} onChange={(e) => setPertes(e.target.value)} />
+                            <FormHelperText></FormHelperText>
                         </FormControl>
                         {/* <FormControl>
                             <FormLabel>Pays</FormLabel>
@@ -492,4 +547,4 @@ const DrawerUpdateProduct = (props: { open: boolean, item: IProduct, onClose: (v
     )
 }
 
-export { DrawerCreateUser, DrawerUpdateUser, DrawerUpdateProduct }
+export { DrawerCreateUser, DrawerUpdateUser, DrawerCreateProduct }

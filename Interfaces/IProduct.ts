@@ -16,7 +16,7 @@ export interface IProduct {
     quantite_achete: number,
     quantite_perdue: number,
     quantite_restante: number,
-    unite: number,
+    unite: string,
     userId: string,
     user: IUtilisateur,
     categorieId: string,

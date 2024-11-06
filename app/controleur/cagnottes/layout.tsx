@@ -1,11 +1,9 @@
 "use client"
-import { Box, Breadcrumb, Stack, TableContainer, Thead, Tfoot, Table, Tbody, IconButton, Th, Tr, Td, BreadcrumbItem, BreadcrumbLink, Button, ButtonGroup, Heading,  Input, InputGroup, InputRightElement, Text, Avatar } from "@chakra-ui/react"
+import { Box, Breadcrumb, TableContainer, Thead, Tfoot, Table, Tbody, IconButton, Th, Tr, Td, BreadcrumbItem, BreadcrumbLink, Button, ButtonGroup, Heading, Input, InputGroup, InputRightElement, Stack, Text } from "@chakra-ui/react"
 // import AlertComponent from "@/components/ui/AlertComponent"
 // import { useState } from "react"
 import CardStatSimple from "@/components/ui/CardStatSimple";
 import { SearchIcon, ViewIcon } from "@chakra-ui/icons"
-// import { CategorieList } from "./DataCategorie"
-// import { ModalCreateCategorie } from "@/components/ui/ModalsComponent";
 import CagnotteIcon from "@/public/icones/icons8-piggy-bank-94.png";
 import { DataCagnotte } from "./DataCagnotte";
 // import { ICagnotte } from "@/Interfaces/ICagnotte";
@@ -36,10 +34,10 @@ export default function Layout({
             <title>Reserve - Utilisateurs</title>
             <Breadcrumb separator='-' fontSize={"small"}>
                 <BreadcrumbItem>
-                    <BreadcrumbLink href='/admin/home'>Tableau de bord</BreadcrumbLink>
+                    <BreadcrumbLink href='/controleur/home'>Tableau de bord</BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbItem>
-                    <BreadcrumbLink href='/admin/cagnottes'>Cagnottes</BreadcrumbLink>
+                    <BreadcrumbLink href='/controleur/cagnottes'>Cagnottes</BreadcrumbLink>
                 </BreadcrumbItem>
             </Breadcrumb>
             {/* {
@@ -95,9 +93,9 @@ export default function Layout({
                                                     <Td>
                                                         <ButtonGroup>
                                                             <Button size={"sm"} colorScheme={"red"} title="Suspendre la cagnotte" variant={"ghost"}> Suspendre</Button>
-                                                           
+
                                                             <IconButton
-                                                                onClick={() => router.push("/admin/cagnottes/" + item.id) }
+                                                                onClick={() => router.push("/admin/cagnottes/" + item.id)}
                                                                 size={"sm"}
                                                                 colorScheme="blue"
                                                                 aria-label='Détails'

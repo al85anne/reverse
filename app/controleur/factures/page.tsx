@@ -1,5 +1,5 @@
 "use client"
-import { Box, Breadcrumb, ListItem, List, BreadcrumbItem, BreadcrumbLink, HStack, Input, InputGroup, InputRightElement, Stack, Tag, TagLabel, Text } from "@chakra-ui/react"
+import { Box, Breadcrumb, ListItem, List, BreadcrumbItem, BreadcrumbLink,  HStack, Input, InputGroup, InputRightElement,  Stack, Tag, TagLabel, Text } from "@chakra-ui/react"
 // import AlertComponent from "@/components/ui/AlertComponent"
 import { useState } from "react"
 import CardStatSimple from "@/components/ui/CardStatSimple";
@@ -36,10 +36,10 @@ export default function Page() {
             <title>Reserve - Utilisateurs</title>
             <Breadcrumb separator='-' fontSize={"small"}>
                 <BreadcrumbItem>
-                    <BreadcrumbLink href='/admin/home'>Tableau de bord</BreadcrumbLink>
+                    <BreadcrumbLink href='/controleur/home'>Tableau de bord</BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbItem>
-                    <BreadcrumbLink href='/admin/factures'>Factures</BreadcrumbLink>
+                    <BreadcrumbLink href='/controleur/factures'>Factures</BreadcrumbLink>
                 </BreadcrumbItem>
             </Breadcrumb>
             {/* {

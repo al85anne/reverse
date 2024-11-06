@@ -24,12 +24,13 @@ export default function Home() {
       //   email: email,
       //   motDePasse: password,
       // });
-      navigate.push("/admin/home");
-      // if (role == "admin") {
-      //   navigate.push("/admin/home");
-      // }else{
-      //   alert('Page non disponible')
-      // }
+
+      if (role == "admin") {
+        navigate.push("/admin/home");
+      }else{
+        navigate.push("/controleur/home");
+
+      }
       // var csrfToken = axios.defaults.headers.common['X-CSRF-Token'];
       // var config = {
       //   method: "post",
@@ -87,6 +88,7 @@ export default function Home() {
                       value={role}
                       color="blue"
                       id="role"
+                      required
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       
                     >

@@ -1,5 +1,5 @@
 import { ICagnotte } from "@/Interfaces/ICagnotte";
-import { UserList } from "../utilisateurs/DataUtilisateur";
+import { UserList } from "@/app/admin/utilisateurs/DataUtilisateur";
 // import { UserList } from "../utilisateurs/DataUtilisateur";
 
 export const DataCagnotte : ICagnotte[] = [{
